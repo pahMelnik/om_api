@@ -2,15 +2,6 @@ import json
 import requests
 import pandas as pd
 
-
-# Убрать константы из библиотеки они должны определяться  в коде
-COOKIE = {'token' : "f738919f7f9f49697f0c369fc16b"}
-
-SERVICE = 'api_test_export_import'
-
-URL = f"https://ws116.optimacros.com/api/v1/service/{SERVICE}"
-
-
 def make_request(request_type: str, param: dict = ..., data: dict = ...):
     url = globals()['URL']
     cookie = globals()['COOKIE']
@@ -85,6 +76,13 @@ def get_items(list_name: str, parent: str = ...):
         elements = data['Item Name']
     else:
         elements = data.loc[data['Parent'] == parent]['Item Name']
+    elements = elements.to_list()
+    return elements
+
+
+def get_items_under_parent(list_name: str, parent: str):
+    data = get_list(list_name)
+    elements = data.loc[data['Parent'] == parent]['Item Name']
     elements = elements.to_list()
     return elements
 
