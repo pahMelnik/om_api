@@ -2,15 +2,15 @@
 
 Это библиотека с набором функций для работы с Optomacros API
 В библиотеке есть функции:
-- [make_request](##make_request)
-- [DataFrame_to_List](##DataFrame_to_List)
-- [get_properties](##get_properties)
-- [get_list](##get_list)
-- [get_parents](##get_parents)
-- [get_items](##get_items)
-- [get_items_under_parent](##get_items_under_parent)
-- [add_item_to_list](##add_item_to_list)
-- [change_properties](##change_properties)
+- [make_request](#make_request)
+- [DataFrame_to_List](#DataFrame_to_List)
+- [get_properties](#get_properties)
+- [get_list](#get_list)
+- [get_parents](#get_parents)
+- [get_items](#get_items)
+- [get_items_under_parent](#get_items_under_parent)
+- [add_item_to_list](#add_item_to_list)
+- [change_properties](#change_properties)
 - [add_item_with_properties](#add_item_with_properties)
 
 ## make_request
