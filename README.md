@@ -11,7 +11,7 @@
 - [get_items_under_parent](##get_items_under_parent)
 - [add_item_to_list](##add_item_to_list)
 - [change_properties](##change_properties)
-- [add_item_with_properties](##add_item_with_properties)
+- [add_item_with_properties](#add_item_with_properties)
 
 ## make_request
 `make_request(request_type: str, param: dict = ..., data: dict = ...)`
