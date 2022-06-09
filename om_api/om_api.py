@@ -2,9 +2,7 @@ import json
 import requests
 import pandas as pd
 
-def make_request(request_type: str, param: dict = ..., data: dict = ...):
-    url = globals()['URL']
-    cookie = globals()['COOKIE']
+def make_request(request_type: str, url: str, cookie: dict, param: dict = ..., data: dict = ...):
     if param is ...:
         param = {}
     if data is ...:
@@ -39,10 +37,8 @@ def DataFrame_to_List(data):
     return list
 
 
-def get_properties(list_name: str):
+def get_properties(list_name: str, url: str, cookie: dict):
     """Возвращает список свойств справочника"""
-    url = globals()['URL']
-    cookie = globals()['COOKIE']
     param = {"type": "list", # Тип источника multicube | om_multicube | list
          "name": list_name  # Название МК/справочника
         }
@@ -50,28 +46,28 @@ def get_properties(list_name: str):
     row_data = response.json()['params']['data']['requestedData']
     return row_data[0][6:]
 
-def get_list(list_name: str):
+def get_list(list_name: str, url: str, cookie: dict):
     """Возвращает справочник в формате DataFrame"""
     param = {"type": "list", # Тип источника multicube | om_multicube | list
          "name": list_name  # Название МК/справочника
         }
-    response = make_request(request_type= 'get', param=param)
+    response = make_request(url=url, cookie=cookie, request_type= 'get', param=param)
     row_data = response.json()['params']['data']['requestedData']
     data = pd.DataFrame(row_data[1:],
                         columns=row_data[0])
     return data
 
 
-def get_parents(list_name: str):
+def get_parents(list_name: str, url: str, cookie: dict):
     """Возвращает список парентов в справочнике"""
-    data = get_list(list_name)
+    data = get_list(list_name, url=url, cookie=cookie)
     parents = data.loc[data['Parent'].isna()==True]['Item Name']
     parents = parents.to_list()
     return parents
 
 
-def get_items(list_name: str, parent: str = ...):
-    data = get_list(list_name)
+def get_items(list_name: str, url: str, cookie: dict, parent: str = ...):
+    data = get_list(list_name, url=url, cookie=cookie)
     if parent is ...:
         elements = data['Item Name']
     else:
@@ -80,14 +76,14 @@ def get_items(list_name: str, parent: str = ...):
     return elements
 
 
-def get_items_under_parent(list_name: str, parent: str):
-    data = get_list(list_name)
+def get_items_under_parent(list_name: str, parent: str, url: str, cookie: dict):
+    data = get_list(list_name, url=url, cookie=cookie)
     elements = data.loc[data['Parent'] == parent]['Item Name']
     elements = elements.to_list()
     return elements
 
 
-def add_item_to_list(list_name: str, item_name: str, parent: str= ...):
+def add_item_to_list(list_name: str, item_name: str, url: str, cookie: dict, parent: str= ...):
     if parent is ... :
         data_json = {'Item Name': item_name}
         src_to_dest_column_map = {'Item Name': 'Item Name'}
@@ -116,12 +112,12 @@ def add_item_to_list(list_name: str, item_name: str, parent: str= ...):
         },
         "DATA": [data_json]
     })
-    response = make_request(request_type='post', data=param)
+    response = make_request(url=url, cookie=cookie, request_type='post', data=param)
     
     return
 
 
-def change_properties(list_name: str, item_name: str, properties: dict, parent: str = ...):
+def change_properties(list_name: str, item_name: str, properties: dict, url: str, cookie: dict, parent: str = ...):
     if parent is ... :
         data_json = {'Item Name': item_name}
         src_to_dest_column_map = {'Item Name': 'Item Name'}
@@ -153,14 +149,14 @@ def change_properties(list_name: str, item_name: str, properties: dict, parent: 
         },
         "DATA": [data_json]
     })
-    response = make_request(request_type='post', data=param)
+    response = make_request(url=url, cookie=cookie, request_type='post', data=param)
     
     return 
 
 
-def add_item_with_properties(list_name: str, item_name: str, properties: dict, parent: str = ...):
+def add_item_with_properties(list_name: str, item_name: str, properties: dict, url: str, cookie: dict, parent: str = ...):
     if item_name in get_items(list_name):
-        change_properties(list_name, item_name, properties, parent)
+        change_properties(list_name, item_name, properties,url,cookie, parent)
     else:
-        add_item_to_list(list_name, item_name, parent)
-        change_properties(list_name, item_name, properties, parent)
+        add_item_to_list(list_name, item_name,url,cookie, parent)
+        change_properties(list_name, item_name, properties,url,cookie, parent)

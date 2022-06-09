@@ -1,6 +1,6 @@
 import setuptools
 
-version = '0.1.0'
+version = '0.1.6'
 with open('README.md', encoding='utf-8') as f:
     long_description = f.read()
 
@@ -14,6 +14,8 @@ setuptools.setup(
     long_description_content_type= 'text/markdown',
     url= 'https://github.com/pahMelnik/om_api',license= 'MIT see LICESE file',
     packages= ['om_api'],
-    install_requires= ['requests', 'json', 'pandas'],
-    classifiers=[    "Programming Language :: Python :: 3",    "License :: OSI Approved :: MIT License",    "Operating System :: OS Independent"]
+    install_requires= ['requests', 'pandas'],
+    classifiers=["Programming Language :: Python :: 3",
+                "License :: OSI Approved :: MIT License",
+                "Operating System :: OS Independent"]
 )

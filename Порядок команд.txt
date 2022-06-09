@@ -1,0 +1,7 @@
+1. удаление папки dist
+    rmdir dist
+2. Создание папки dist с новыми параметрами
+    py -m build
+3. python setup.py sdist
+4. Загрузка библиотеки на PYPI
+    twine upload -u __token__ -p pypi-AgEIcHlwaS5vcmcCJDI5OTU1MjUyLTQxY2QtNDE1ZS1iYmRjLTllMjZmMDRmZTZjNwACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYg_GnOLsaH41UfETiRnIHVsdynOA7D0FkIr-fAV-vFxcM dist/*
