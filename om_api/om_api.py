@@ -76,13 +76,6 @@ def get_items(list_name: str, url: str, cookie: dict, parent: str = ...):
     return elements
 
 
-def get_items_under_parent(list_name: str, parent: str, url: str, cookie: dict):
-    data = get_list(list_name, url=url, cookie=cookie)
-    elements = data.loc[data['Parent'] == parent]['Item Name']
-    elements = elements.to_list()
-    return elements
-
-
 def add_item_to_list(list_name: str, item_name: str, url: str, cookie: dict, parent: str= ...):
     if parent is ... :
         data_json = {'Item Name': item_name}
