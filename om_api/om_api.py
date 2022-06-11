@@ -37,11 +37,17 @@ def DataFrame_to_List(data):
     return list
 
 
-def get_properties(list_name: str, url: str, cookie: dict):
+def get_properties(list_name: str, url: str, cookie: dict, view_name: str= ...):
     """Возвращает список свойств справочника"""
-    param = {"type": "list", # Тип источника multicube | om_multicube | list
-         "name": list_name  # Название МК/справочника
-        }
+    if view_name == ...:
+        param = {"type": "list", # Тип источника multicube | om_multicube | list
+            "name": list_name  # Название МК/справочника
+            }
+    else:
+        param = {"type": "list", # Тип источника multicube | om_multicube | list
+            "name": list_name,  # Название МК/справочника
+            'view_name' : view_name,
+            }
     response = make_request(url=url, request_type='get', cookie=cookie, param=param)
     row_data = response.json()['params']['data']['requestedData']
     return row_data[0][6:] #Корректно для пользователя с правами администратора воркспейса
