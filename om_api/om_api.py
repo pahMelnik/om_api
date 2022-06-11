@@ -44,7 +44,7 @@ def get_properties(list_name: str, url: str, cookie: dict):
         }
     response = make_request(url=url, request_type='get', cookie=cookie, param=param)
     row_data = response.json()['params']['data']['requestedData']
-    return row_data[0][6:]
+    return row_data[0][6:] #Корректно для пользователя с правами администратора воркспейса
 
 def get_list(list_name: str, url: str, cookie: dict):
     """Возвращает справочник в формате DataFrame"""
