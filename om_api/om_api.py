@@ -83,9 +83,9 @@ def get_parents(list_name: str, url: str, cookie: dict):
 def get_items(list_name: str, url: str, cookie: dict, parent: str = ...):
     data = get_list(list_name, url=url, cookie=cookie)
     if parent is ...:
-        elements = data['Item Name']
+        elements = data.query(f'List == \'{list_name}\'')['Item Name']
     else:
-        elements = data.loc[data['Parent'] == parent]['Item Name']
+        elements = data.query(f'List == \'{list_name}\' and Parent = \'{parent}\'')['Item Name']
     elements = elements.to_list()
     return elements
 

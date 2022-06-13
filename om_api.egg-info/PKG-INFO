@@ -1,11 +1,12 @@
 Metadata-Version: 2.1
 Name: om-api
-Version: 0.1.15
+Version: 0.1.16
 Summary: Functions to work with Optimacros API
 Home-page: https://github.com/pahMelnik/om_api
 Author: Matvey Scherbakov
 Author-email: l89851175735@gmail.com
 License: MIT see LICESE file
+Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
@@ -93,3 +94,4 @@ from om_api import om_api
 `add_item_with_properties(list_name: str, item_name: str, properties: dict, url: str, cookie: dict, parent: str = ...)`
 
 Объединение функций [add_item_to_list](#add_item_to_list) и [change_properties](#change_properties) позволяет создавать эллемент с заполнением его параметров
+
