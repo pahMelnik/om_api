@@ -64,7 +64,7 @@ def get_list(list_name: str, url: str, cookie: dict):
     return data
 
 
-def get_parents(list_name: str, url: str, cookie: dict):
+def get_parents(list_name: str, url: str, cookie: dict, parent: str = ...):
     """Возвращает список парентов в справочнике"""
     data = get_list(list_name, url, cookie)
     lists = data['List'].unique()
@@ -76,7 +76,10 @@ def get_parents(list_name: str, url: str, cookie: dict):
     if len(lists) == 1:
         data = data.query(f'Parent.isna()')
     else:
-        data = data.query(f'List == \'{ierarhy[2]}\'')
+        if parent == ...:
+            data = data.query(f'List == \'{ierarhy[2]}\'')
+        else:
+            data = data.query(f'List == \'{ierarhy[2]}\' and Parent == \'{parent}\'')
     return data['Item Name'].to_list()
 
 
