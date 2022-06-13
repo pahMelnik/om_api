@@ -154,7 +154,7 @@ def change_properties(list_name: str, item_name: str, properties: dict, url: str
 
 
 def add_item_with_properties(list_name: str, item_name: str, properties: dict, url: str, cookie: dict, parent: str = ...):
-    if item_name in get_items(list_name):
+    if item_name in get_items(list_name,url,cookie,parent):
         change_properties(list_name, item_name, properties,url,cookie, parent)
     else:
         add_item_to_list(list_name, item_name,url,cookie, parent)

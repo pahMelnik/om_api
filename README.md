@@ -1,5 +1,19 @@
 # om_api
 
+# Установка библиотеки
+## Установка пакета Windows
+```
+pip install om_api
+```
+## Обновление пакета Windows
+```
+pip install --upgrade om_api
+```
+## Импорт библиотеки в Python коде
+```python
+from om_api import om_api
+```
+
 Это библиотека с набором функций для работы с Optomacros API
 В библиотеке есть функции:
 - [make_request](#make_request)
