@@ -66,7 +66,7 @@ def get_list(list_name: str, url: str, cookie: dict):
 
 def get_parents(list_name: str, url: str, cookie: dict):
     """Возвращает список парентов в справочнике"""
-    data = get_list(list, url, cookie)
+    data = get_list(list_name, url, cookie)
     lists = data['List'].unique()
     ierarhy = {}
     lvl = len(lists)
