@@ -66,10 +66,18 @@ def get_list(list_name: str, url: str, cookie: dict):
 
 def get_parents(list_name: str, url: str, cookie: dict):
     """Возвращает список парентов в справочнике"""
-    data = get_list(list_name, url=url, cookie=cookie)
-    parents = data.loc[data['Parent'].isna()==True]['Item Name']
-    parents = parents.to_list()
-    return parents
+    data = get_list(list, url, cookie)
+    lists = data['List'].unique()
+    ierarhy = {}
+    lvl = len(lists)
+    for i in lists:
+        ierarhy.update({lvl:i})
+        lvl -= 1
+    if len(lists) == 1:
+        data = data.query(f'Parent.isna()')
+    else:
+        data = data.query(f'List == \'{ierarhy[2]}\'')
+    return data['Item Name'].to_list()
 
 
 def get_items(list_name: str, url: str, cookie: dict, parent: str = ...):
@@ -159,3 +167,4 @@ def add_item_with_properties(list_name: str, item_name: str, properties: dict, u
     else:
         add_item_to_list(list_name, item_name,url,cookie, parent)
         change_properties(list_name, item_name, properties,url,cookie, parent)
+
