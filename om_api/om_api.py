@@ -171,3 +171,9 @@ def add_item_with_properties(list_name: str, item_name: str, properties: dict, u
         add_item_to_list(list_name, item_name,url,cookie, parent)
         change_properties(list_name, item_name, properties,url,cookie, parent)
 
+
+def filter_list_by_property(list_name: str, property_name: str, property_value: str, url: str, cookie: str):
+    data = get_list(list_name, url, cookie)
+    filtred_data = data.loc[data[property_name] == property_value]
+    return filtred_data
+
