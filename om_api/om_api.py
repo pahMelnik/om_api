@@ -78,13 +78,13 @@ def get_parents(list_name: str, url: str, cookie: dict, parent: str = ...):
         if json.loads(data['Debug'][0].replace('\n    ',''))['id'] == 0:
             data= parents[1:]
         else:
-            data = data.query(f'Parent.isna()')
+            data = data.query(f'Parent.isna()')['Item Name'].to_list()
     else:
         if parent == ...:
-            data = data.query(f'List == \'{ierarhy[2]}\'')
+            data = data.query(f'List == \'{ierarhy[2]}\'')['Item Name'].to_list()
         else:
-            data = data.query(f'List == \'{ierarhy[2]}\' and Parent == \'{parent}\'')
-    return data['Item Name'].to_list()
+            data = data.query(f'List == \'{ierarhy[2]}\' and Parent == \'{parent}\'')['Item Name'].to_list()
+    return data
 
 
 def get_items(list_name: str, url: str, cookie: dict, parent: str = ...):
