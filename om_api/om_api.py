@@ -68,13 +68,17 @@ def get_parents(list_name: str, url: str, cookie: dict, parent: str = ...):
     """Возвращает список парентов в справочнике"""
     data = get_list(list_name, url, cookie)
     lists = data['List'].unique()
+    parents = data['Parent'].unique()
     ierarhy = {}
     lvl = len(lists)
     for i in lists:
         ierarhy.update({lvl:i})
         lvl -= 1
     if len(lists) == 1:
-        data = data.query(f'Parent.isna()')
+        if json.loads(data['Debug'][0].replace('\n    ',''))['id'] == 0:
+            data= parents[1:]
+        else:
+            data = data.query(f'Parent.isna()')
     else:
         if parent == ...:
             data = data.query(f'List == \'{ierarhy[2]}\'')
