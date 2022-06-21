@@ -76,7 +76,7 @@ def get_parents(list_name: str, url: str, cookie: dict, parent: str = ...):
         lvl -= 1
     if len(lists) == 1:
         if json.loads(data['Debug'][0].replace('\n    ',''))['id'] == 0:
-            data= parents[1:]
+            data= list(parents[1:])
         else:
             data = data.query(f'Parent.isna()')['Item Name'].to_list()
     else:
